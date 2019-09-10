@@ -7,3 +7,7 @@
 /captures
 .externalNativeBuild
 .cxx
+
+# bintray 用户名 & apikey
+.bintray.properties
+
