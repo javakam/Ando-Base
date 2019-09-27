@@ -9,5 +9,4 @@
 .cxx
 
 # bintray 用户名 & apikey
-.bintray.properties
-
+bintray.properties
