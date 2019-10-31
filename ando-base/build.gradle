@@ -26,6 +26,7 @@ android {
 
 
     dataBinding {
+        //noinspection DataBindingWithoutKapt
         enabled = true
     }
 
@@ -41,12 +42,23 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
-//    api 'androidx.appcompat:appcompat:1.1.0'
-//    api 'androidx.core:core-ktx:1.1.0'
+    api fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+
+    //androidx
+    //api 'androidx.core:core-ktx:1.1.0'
+    api deps["x_design"]
+    api deps["x_appcompat"]
+    api deps["x_annotations"]
+    api deps["x_recyclerview"]
+    api deps["x_cardview"]
+    api deps["x_constraintlayout"]
+    api deps["x_multidex"]
 
     //Kotlin Anko
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -55,23 +67,52 @@ dependencies {
     api "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
 
     // Test
-    testApi deps.junit
-    androidTestApi deps.test_runner
-    androidTestApi deps.test_espresso_core
+    testImplementation deps.junit
+    androidTestImplementation deps.test_runner
+    androidTestImplementation deps.test_espresso_core
 
     // Support libraries
-    api deps["support_v4"]
-    api deps["appcompat_v7"]
-    api deps["cardview_v7"]
-    api deps["recyclerview_v7"]
-    api deps["design"]
-    api deps["constraint"]
-    // 配置应用进行 Dalvik 可执行文件分包  https://developer.android.google.cn/studio/build/multidex#mdex-gradle
-    api deps["multidex"]
+//    api deps["support_v4"]
+//    api deps["appcompat_v7"]
+//    api deps["cardview_v7"]
+//    api deps["recyclerview_v7"]
+//    api deps["design"]
+//    api deps["constraint"]
+//    // 配置应用进行 Dalvik 可执行文件分包  https://developer.android.google.cn/studio/build/multidex#mdex-gradle
+//    api deps["multidex"]
+
+    // Others
+    api deps["eventbus"]
+    /*
+    > Task :ando-base:compileReleaseJavaWithJavac
+    Gradle may disable incremental compilation as the following annotation processors are not incremental: eventbus-annotation-processor-3.1.1.jar (org.greenrobot:eventbus-annotation-processor:3.1.1).
+    Consider setting the experimental feature flag android.enableSeparateAnnotationProcessing=true in the gradle.properties file to run annotation processing in a separate task and make compilation incremental.
+     */
+    annotationProcessor deps["eventbus_annotation_processor"]
+
+    //rx
+    api deps["rxjava2"]
+    api deps["rxandroid"]
+    api deps["rxbinding2"]
+    //network
+    api deps["gson"]
+    api deps["retrofit"]
+    api deps["retrofit_converter_gson"]
+    api deps["retrofit_adapter_rxjava2"]
+    api deps["okhttp"]
+    api deps["okhttp_logging_interceptor"]
+    //glide
+    api deps["glide"]
+    api deps["glide_transformations"]
 
 }
 
 /** 以下开始是将Android Library上传到 jcenter 的相关配置**/
+/*
+命令行 :
+./gradlew clean build bintrayUpload  -PbintrayUser=berosy
+    -PbintrayKey=********************  -PdryRun=false
+*/
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
@@ -86,7 +127,7 @@ group = "com.ando"
 //发布到JCenter上的项目名字，必须填写
 def libName = "ando-base"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.0.2"
+version = "1.0.8"
 /**  上面配置后上传至jcenter后的编译路径是这样的： compile 'com.ando:ando-base:1.0'  **/
 
 //生成源文件
@@ -188,5 +229,6 @@ javadoc {
         author true
         version true
         links "http://docs.oracle.com/javase/7/docs/api"
+        failOnError false
     }
 }
