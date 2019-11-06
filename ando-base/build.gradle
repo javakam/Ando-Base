@@ -48,7 +48,7 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+    api fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     //androidx
     //api 'androidx.core:core-ktx:1.1.0'
@@ -118,16 +118,16 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 //项目主页
-def siteUrl = 'https://github.com/javakam/Ando-Base'    // project homepage
+def siteUrl = 'https://github.com/javakam/AndoBase'    // project homepage
 //项目的版本控制地址
-def gitUrl = 'https://github.com/javakam/Ando-Base.git' // project git
+def gitUrl = 'https://github.com/javakam/AndoBase.git' // project git
 
 //发布到组织名称名字，必须填写
 group = "com.ando"
 //发布到JCenter上的项目名字，必须填写
 def libName = "ando-base"
 // 版本号，下次更新是只需要更改版本号即可
-version = "1.0.8"
+version = "0.0.1"
 /**  上面配置后上传至jcenter后的编译路径是这样的： compile 'com.ando:ando-base:1.0'  **/
 
 //生成源文件

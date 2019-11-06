@@ -13,10 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.ArrayRes;
+import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.ando.base.utils.StatusBarUtil;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Arrays;
@@ -55,7 +58,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         initMvp();
-        initView();
+        initView(savedInstanceState);
         initListener();
         initData();
     }
@@ -63,7 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initMvp() {
     }
 
-    protected abstract void initView();
+    protected abstract void initView(@Nullable Bundle savedInstanceState);
 
     protected abstract void initData();
 
@@ -75,8 +78,25 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initActivityStyle() {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
 
-//        StatusBarUtil.setColorNoTranslucent(this, getResources().getColor(R.color.colorPrimary));
+    /**
+     * 设置状态栏颜色
+     *
+     * @param color
+     */
+    protected void setStatusBarColor(@ColorInt int color) {
+        setStatusBarColor(color, StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA);
+    }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @param color
+     * @param statusBarAlpha 透明度
+     */
+    public void setStatusBarColor(@ColorInt int color, @IntRange(from = 0, to = 255) int statusBarAlpha) {
+        StatusBarUtil.setColorForSwipeBack(this, color, statusBarAlpha);
     }
 
     @Override
@@ -84,7 +104,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onDestroy();
         mView = null;
     }
-
 
     /**
      * 获取String资源
