@@ -10,22 +10,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public abstract class BaseMvpRefreshFragment<T extends BaseContract.IPresenter, K>
+public abstract class BaseMvpRefreshFragment<T extends BaseContract.IPresenter, Data>
         extends BaseMvpFragment<T> implements SwipeRefreshLayout.OnRefreshListener {
 
     protected RecyclerView mRecycler;
     protected SwipeRefreshLayout mRefresh;
-    protected boolean mIsRefreshing;
-    protected List<K> mList = new ArrayList<>();
+    protected boolean isRefreshing;
+    protected List<Data> mList = new ArrayList<>();
+
 
     @Override
-    protected void initData() {
-
-    }
-
-    @Override
-    protected void initView(Bundle savedInstanceState) {
+    public void initView(Bundle savedInstanceState) {
 //        mRefresh = rootView.findViewById(R.id.refresh);
 //        mRecycler = rootView.findViewById(R.id.recycler);
 
@@ -34,28 +29,29 @@ public abstract class BaseMvpRefreshFragment<T extends BaseContract.IPresenter, 
 
         mRecycler.setHasFixedSize(true);
         mRecycler.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        initRecyclerView();
+        initViews(savedInstanceState);
     }
 
-    protected abstract void initRecyclerView();
+    protected abstract void initViews(Bundle savedInstanceState);
+
+    protected abstract void onRefreshData();
+
+    protected abstract void clearCachedData();
 
     @Override
     public void onRefresh() {
-        mIsRefreshing = true;
+        isRefreshing = true;
         onRefreshData();
         mRefresh.setRefreshing(false);
     }
 
-    protected abstract void onRefreshData();
-
-    protected void onRefreshComplete() {
-        if (mIsRefreshing) {
+    protected void onRefreshCompleted() {
+        if (isRefreshing) {
             mList.clear();
             clearCachedData();
-            Toast.makeText(activity, "刷新成功", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(activity, "刷新成功", Toast.LENGTH_SHORT).show();
         }
-        mIsRefreshing = false;
+        isRefreshing = false;
     }
 
-    protected abstract void clearCachedData();
 }

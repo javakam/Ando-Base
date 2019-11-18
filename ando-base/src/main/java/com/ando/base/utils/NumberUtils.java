@@ -7,7 +7,8 @@ import java.math.BigDecimal;
  * <p>
  * Description:数据工具类
  * </p>
- * Author Jming.L
+ *
+ * @author Changbao
  * Date 2018/8/17 14:40
  */
 public class NumberUtils {

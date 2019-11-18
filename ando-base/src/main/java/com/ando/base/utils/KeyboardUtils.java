@@ -23,8 +23,8 @@ import java.util.HashMap;
 /**
  * 软键盘工具
  *
- * @author xuexiang
- * @since 2019/1/14 下午10:04
+ * @author Changbao
+ * @date 2019-11-18 22:10:47
  */
 public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener {
 
@@ -303,7 +303,7 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener {
      */
     public static void hideSoftInput(final View view) {
         InputMethodManager imm =
-                (InputMethodManager) AppUtils.getInstance().getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) AppUtils.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) {
             return;
         }
@@ -316,7 +316,7 @@ public class KeyboardUtils implements ViewTreeObserver.OnGlobalLayoutListener {
      */
     public static void toggleSoftInput() {
         InputMethodManager imm =
-                (InputMethodManager) AppUtils.getInstance().getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                (InputMethodManager) AppUtils.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) {
             return;
         }

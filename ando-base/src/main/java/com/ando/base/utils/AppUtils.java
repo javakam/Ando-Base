@@ -1,5 +1,6 @@
 package com.ando.base.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -13,19 +14,12 @@ import androidx.annotation.NonNull;
  * @author Changbao
  * @date 2019/3/17 14:45
  */
+@SuppressLint("StaticFieldLeak")
 public final class AppUtils {
 
-    private static AppUtils instance;
-    private Context context;
+    private static Context context;
 
     private AppUtils() {
-    }
-
-    public static synchronized AppUtils getInstance() {
-        if (instance == null) {
-            instance = new AppUtils();
-        }
-        return instance;
     }
 
     /**
@@ -33,8 +27,8 @@ public final class AppUtils {
      *
      * @param context 上下文
      */
-    public void init(@NonNull Context context) {
-        this.context = context.getApplicationContext();
+    public static void init(@NonNull Context context) {
+        AppUtils.context = context.getApplicationContext();
     }
 
     /**
@@ -42,10 +36,14 @@ public final class AppUtils {
      *
      * @return ApplicationContext
      */
-    public Context getContext() {
+    public static Context getContext() {
         if (context != null) {
             return context;
         }
         throw new NullPointerException("u should init first");
+    }
+
+    public static void destroy() {
+        AppUtils.context = null;
     }
 }

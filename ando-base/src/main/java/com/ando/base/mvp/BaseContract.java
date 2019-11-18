@@ -9,7 +9,8 @@ public interface BaseContract {
          */
         void showError(String msg);
 
-        void complete();
+        void showCompleted();
+
     }
 
     interface IPresenter<T> {

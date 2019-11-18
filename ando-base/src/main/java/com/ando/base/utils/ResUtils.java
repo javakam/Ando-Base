@@ -38,7 +38,7 @@ public final class ResUtils {
      * @return
      */
     public static Resources getResources() {
-        return AppUtils.getInstance().getContext().getResources();
+        return AppUtils.getContext().getResources();
     }
 
     /**
@@ -59,7 +59,7 @@ public final class ResUtils {
      */
     public static Drawable getDrawable(@DrawableRes int resId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return AppUtils.getInstance().getContext().getDrawable(resId);
+            return AppUtils.getContext().getDrawable(resId);
         }
         return getResources().getDrawable(resId);
     }
@@ -186,7 +186,7 @@ public final class ResUtils {
      * @return
      */
     public static Animation getAnim(@AnimRes int resId) {
-        return AnimationUtils.loadAnimation(AppUtils.getInstance().getContext(), resId);
+        return AnimationUtils.loadAnimation(AppUtils.getContext(), resId);
     }
 
     /**

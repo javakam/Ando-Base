@@ -1,38 +1,25 @@
 package com.ando.base.base;
 
-import android.os.Bundle;
-
 /**
  * Fragment 懒加载
  *
- * @author machangbao
- * @date 2019年03月08日
+ * @author Changbao
+ * @date 2019-11-18 20:55:14
  */
-public abstract class BaseLazyFragment extends BaseFragment {
-
-    protected boolean isActivityCreated;    //Activity是否已创建
-    protected boolean isVisibleToUser;      //Fragment是否对用户可见
-    protected boolean isDataInitiated;      //Fragment是否已加载过数据
+public abstract class BaseLazyFragment extends BaseFragment implements IBaseLazyInterface {
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        isActivityCreated = true;
+    public void initData() {
         prepareFetchData();
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        this.isVisibleToUser = isVisibleToUser;
         prepareFetchData();
     }
 
-
-    public boolean prepareFetchData() {
-        return prepareFetchData(false);
-    }
-
+    @Override
     public boolean prepareFetchData(boolean forceUpdate) {
         if (isActivityCreated && isVisibleToUser && (!isDataInitiated || forceUpdate)) {
             /**
@@ -47,7 +34,6 @@ public abstract class BaseLazyFragment extends BaseFragment {
         return false;
     }
 
-    protected abstract void initLazyData();
-
     /*******************************todo 多种空视图处理方式待优化**********************************/
+
 }

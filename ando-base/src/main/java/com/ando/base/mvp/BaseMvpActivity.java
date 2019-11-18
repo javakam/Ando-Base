@@ -1,19 +1,20 @@
 package com.ando.base.mvp;
 
 import com.ando.base.base.BaseActivity;
+import com.ando.base.base.IBaseMvpInterface;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public abstract class BaseMvpActivity<P extends BaseContract.IPresenter> extends BaseActivity implements BaseContract.IView {
+public abstract class BaseMvpActivity<P extends BaseContract.IPresenter> extends BaseActivity
+        implements BaseContract.IView, IBaseMvpInterface {
 
     protected P mPresenter;
     // private RemoteRepository mRepository;
     private CompositeDisposable mCompositeDisposable;
 
     @Override
-    protected void initMvp() {
-        super.initMvp();
+    public void initMvp() {
         initPresenter();
         if (mPresenter != null) {
             mPresenter.attachView(BaseMvpActivity.this);
@@ -23,8 +24,6 @@ public abstract class BaseMvpActivity<P extends BaseContract.IPresenter> extends
         this.mCompositeDisposable = new CompositeDisposable();
     }
 
-    protected abstract void initPresenter();
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -32,7 +31,6 @@ public abstract class BaseMvpActivity<P extends BaseContract.IPresenter> extends
             mPresenter.detachView();
             mPresenter = null;
         }
-
         unSubscribe();
     }
 
@@ -54,11 +52,10 @@ public abstract class BaseMvpActivity<P extends BaseContract.IPresenter> extends
 
     @Override
     public void showError(String msg) {
-
     }
 
     @Override
-    public void complete() {
-
+    public void showCompleted() {
     }
+
 }

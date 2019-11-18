@@ -10,6 +10,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.ando.base.utils.StringUtils;
+import com.ando.base.utils.ToastUtils;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Title:BaseFragment
@@ -20,13 +26,17 @@ import androidx.fragment.app.Fragment;
  * @author Changbao
  * @date 2019/3/17 13:24
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements IBaseInterface {
 
     protected BaseActivity activity;
     protected View rootView;
+    //
+    protected boolean isActivityCreated;    //Activity是否已创建
+    protected boolean isVisibleToUser;      //Fragment是否对用户可见
+    protected boolean isDataInitiated;      //Fragment是否已加载过数据
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         activity = (BaseActivity) context;
     }
@@ -35,7 +45,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(getLayoutId(), container, false);
-        initMvp();
         initView(savedInstanceState);
         initListener();
         return rootView;
@@ -44,25 +53,25 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        isActivityCreated = true;
         initData();
     }
+
+    /**
+     * @deprecated Use {@link FragmentTransaction#setMaxLifecycle}
+     */
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        this.isVisibleToUser = isVisibleToUser;
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();
         rootView = null;
         activity = null;
     }
-
-    protected void initMvp() {
-    }
-    protected abstract void initView(Bundle savedInstanceState);
-
-    protected void initListener() {
-    }
-
-    protected abstract void initData();
-
-    protected abstract int getLayoutId();
 
     /**
      * 通过Class跳转界面
@@ -83,7 +92,7 @@ public abstract class BaseFragment extends Fragment {
      **/
     public void startActivityForResult(Class<?> cls, Bundle bundle, int requestCode) {
         Intent intent = new Intent();
-        intent.setClass(getActivity(), cls);
+        intent.setClass(activity, cls);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
@@ -96,12 +105,20 @@ public abstract class BaseFragment extends Fragment {
     public void startActivity(Class<?> cls, Bundle bundle) {
         if (getActivity() != null) {
             Intent intent = new Intent();
-            intent.setClass(getActivity(), cls);
+            intent.setClass(activity, cls);
             if (bundle != null) {
                 intent.putExtras(bundle);
             }
             startActivity(intent);
         }
+    }
+
+    public void shortToast(String text) {
+        ToastUtils.shortToast(StringUtils.noNull(text));
+    }
+
+    public void longToast(String text) {
+        ToastUtils.longToast(StringUtils.noNull(text));
     }
 
 }

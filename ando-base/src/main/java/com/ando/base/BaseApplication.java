@@ -19,6 +19,7 @@ public class BaseApplication extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        AppUtils.getInstance().init(this);
+        AppUtils.init(this);
     }
+
 }

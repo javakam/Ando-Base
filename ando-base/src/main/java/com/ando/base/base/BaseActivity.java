@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.ando.base.utils.StatusBarUtil;
+import com.ando.base.utils.StringUtils;
+import com.ando.base.utils.ToastUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Arrays;
@@ -38,13 +40,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  * @author Changbao
  * @date 2019/3/17 13:17
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseInterface {
 
-    //系统DecorView的根View
+    /**
+     * 系统DecorView的根View
+     */
     protected View mView;
-    //是否退出App
-    private boolean isExit = false;
 
+    /**
+     * 是否退出App
+     */
+    private boolean isExit = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,23 +63,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             mView = findViewById(android.R.id.content);
         }
 
-        initMvp();
         initView(savedInstanceState);
         initListener();
         initData();
     }
-
-    protected void initMvp() {
-    }
-
-    protected abstract void initView(@Nullable Bundle savedInstanceState);
-
-    protected abstract void initData();
-
-    protected void initListener() {
-    }
-
-    protected abstract int getLayoutId();
 
     protected void initActivityStyle() {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -177,4 +170,13 @@ public abstract class BaseActivity extends AppCompatActivity {
             finish();
         }
     }
+
+    public void shortToast(String text) {
+        ToastUtils.shortToast(StringUtils.noNull(text));
+    }
+
+    public void longToast(String text) {
+        ToastUtils.longToast(StringUtils.noNull(text));
+    }
+
 }

@@ -1262,7 +1262,7 @@ public final class SpanUtils {
 
         private Bitmap uri2Bitmap(final Uri uri) {
             try {
-                return MediaStore.Images.Media.getBitmap(AppUtils.getInstance().getContext().getContentResolver(), uri);
+                return MediaStore.Images.Media.getBitmap(AppUtils.getContext().getContentResolver(), uri);
             } catch (IOException e) {
                 e.printStackTrace();
                 return Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
@@ -1270,7 +1270,7 @@ public final class SpanUtils {
         }
 
         private Bitmap resource2Bitmap(final int resourceId) {
-            Drawable drawable = ContextCompat.getDrawable(AppUtils.getInstance().getContext(), resourceId);
+            Drawable drawable = ContextCompat.getDrawable(AppUtils.getContext(), resourceId);
             Canvas canvas = new Canvas();
             Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
             canvas.setBitmap(bitmap);
@@ -1438,7 +1438,7 @@ public final class SpanUtils {
 
         private CustomImageSpan(final Bitmap b, final int verticalAlignment) {
             super(verticalAlignment);
-            mDrawable = new BitmapDrawable(AppUtils.getInstance().getContext().getResources(), b);
+            mDrawable = new BitmapDrawable(AppUtils.getContext().getResources(), b);
             mDrawable.setBounds(0, 0, mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight());
         }
 
@@ -1466,9 +1466,9 @@ public final class SpanUtils {
             } else if (mContentUri != null) {
                 Bitmap bitmap;
                 try {
-                    InputStream is = AppUtils.getInstance().getContext().getContentResolver().openInputStream(mContentUri);
+                    InputStream is = AppUtils.getContext().getContentResolver().openInputStream(mContentUri);
                     bitmap = BitmapFactory.decodeStream(is);
-                    drawable = new BitmapDrawable(AppUtils.getInstance().getContext().getResources(), bitmap);
+                    drawable = new BitmapDrawable(AppUtils.getContext().getResources(), bitmap);
                     drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
                     if (is != null) {
                         is.close();
@@ -1478,7 +1478,7 @@ public final class SpanUtils {
                 }
             } else {
                 try {
-                    drawable = ContextCompat.getDrawable(AppUtils.getInstance().getContext(), mResourceId);
+                    drawable = ContextCompat.getDrawable(AppUtils.getContext(), mResourceId);
                     drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
                 } catch (Exception e) {
                     Log.e("sms", "Unable to find resource: " + mResourceId);

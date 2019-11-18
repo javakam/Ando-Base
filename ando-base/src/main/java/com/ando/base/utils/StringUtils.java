@@ -207,7 +207,7 @@ public class StringUtils {
     }
 
     public static String noNull(String text) {
-        return TextUtils.isEmpty(text) ? "" : text;
+        return isBlank(text) ? "" : text;
     }
 
 
