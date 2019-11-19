@@ -5,6 +5,5 @@ public interface IBaseMvpInterface extends IBaseInterface {
     default void initMvp() {
     }
 
-    default void initPresenter() {
-    }
+    void initPresenter();
 }

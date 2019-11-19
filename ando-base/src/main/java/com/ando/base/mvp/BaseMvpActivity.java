@@ -1,5 +1,9 @@
 package com.ando.base.mvp;
 
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+
 import com.ando.base.base.BaseActivity;
 import com.ando.base.base.IBaseMvpInterface;
 
@@ -12,6 +16,12 @@ public abstract class BaseMvpActivity<P extends BaseContract.IPresenter> extends
     protected P mPresenter;
     // private RemoteRepository mRepository;
     private CompositeDisposable mCompositeDisposable;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        initMvp();
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public void initMvp() {
