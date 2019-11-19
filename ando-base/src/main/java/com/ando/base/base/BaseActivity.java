@@ -40,7 +40,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
  * @author Changbao
  * @date 2019/3/17 13:17
  */
-public abstract class BaseActivity extends AppCompatActivity implements IBaseInterface {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseInterface, IBaseMvpInterface {
 
     /**
      * 系统DecorView的根View
@@ -55,6 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseInt
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         initActivityStyle();
+        initMvp();
         super.onCreate(savedInstanceState);
 
         int layoutId = getLayoutId();

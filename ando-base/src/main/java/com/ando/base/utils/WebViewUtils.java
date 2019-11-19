@@ -12,6 +12,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import static androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY;
+
 /**
  * WebView简单配置
  *
@@ -78,13 +80,20 @@ public class WebViewUtils {
 
     public static void loadContent(WebView webView, String source) {
         if (webView != null && webView.isAttachedToWindow()) {
-            String newSource = StringUtils.noNull(source);
-            final String url = Html.fromHtml(newSource).toString();
+            final String newSource = StringUtils.noNull(source);
+            String url = "";
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                url = Html.fromHtml(newSource, FROM_HTML_MODE_LEGACY).toString();// for 24 api and more
+            } else {
+                url = Html.fromHtml(newSource).toString();// or for older api
+            }
+
             //检查路径对否合法
             if (Patterns.WEB_URL.matcher(url).matches()) {
                 webView.loadUrl(url);
             } else {
-                webView.loadData(newSource, "text/html", "UTF-8");
+                //webView.loadData(newSource, "text/html", "UTF-8");  //乱码
+                webView.loadDataWithBaseURL(null, newSource, "text/html", "UTF-8", null);
             }
         }
     }
