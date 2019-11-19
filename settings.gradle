@@ -1,2 +1,2 @@
-include ':app', ':ando-base'
-rootProject.name='Ando-Base'
+include ':app', ':ando-base', ':ando-views', ':sample-views'
+rootProject.name = 'AndoComposite'

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PlanProgressBar">
+        <attr name="plan_type" format="enum">
+            <enum name="type_rect" value="0" />
+            <enum name="type_circle" value="1" />
+        </attr>
+        <!--<attr name="plan_progress_gradient" format="reference" />-->
+        <attr name="plan_progress_color" format="color" />
+        <attr name="plan_background_color" format="color" />
+        <attr name="plan_max_value" format="integer" />
+        <attr name="plan_value" format="integer" />
+        <attr name="plan_stroke_inner_circle_distance" format="dimension" />
+        <attr name="plan_stroke_width_inner" format="dimension" />
+        <attr name="plan_stroke_width" format="dimension" />
+        <attr name="plan_stroke_round_cap" format="boolean" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+    </declare-styleable>
+
+    <!--地址选择器默认样式Phone-->
+    <attr name="addressPickerStyle" format="reference" />
+    <!--地址选择器-->
+    <declare-styleable name="AddressPicker">
+        <!--平台选择：手机、平板-->
+        <attr name="picker_mode" format="enum">
+            <enum name="phone" value="0" />
+            <enum name="pad" value="1" />
+        </attr>
+        <!--背景色-->
+        <attr name="picker_background" format="color|reference" />
+        <!--Tab文字大小-->
+        <attr name="picker_tabTextSize" format="dimension" />
+        <!--Tab文字颜色-->
+        <attr name="picker_tabTextColor" format="color|reference" />
+        <!--Tab选中状态的文字颜色-->
+        <attr name="picker_tabSelectedTextColor" format="color|reference" />
+        <!--Tab Indicator宽度-->
+        <attr name="picker_tabIndicatorWidth" format="dimension" />
+        <!--Tab Indicator高度-->
+        <attr name="picker_tabIndicatorHeight" format="dimension" />
+        <!--Tab Indicator颜色-->
+        <attr name="picker_tabIndicatorColor" format="color|reference" />
+        <!--Tab 固定 or 滑动-->
+        <attr name="picker_tabMode" format="enum">
+            <enum name="scrollable" value="0" />
+            <enum name="fixed" value="1" />
+        </attr>
+        <!--分割线-->
+        <attr name="picker_lineColor" format="color|reference" />
+        <!--提示文本-->
+        <attr name="picker_hintTextColor" format="color|reference" />
+        <!--列表条目背景色-->
+        <attr name="picker_itemBackground" format="color|reference" />
+        <!--列表条目选中时背景色-->
+        <attr name="picker_itemPickedBackground" format="color|reference" />
+        <!--列表字母文字颜色-->
+        <attr name="picker_itemLetterTextColor" format="color|reference" />
+        <!--列表地址文字颜色-->
+        <attr name="picker_itemAreaTextColor" format="color|reference" />
+        <!--列表条目选中时显示的箭头-->
+        <attr name="picker_itemArrowDrawable" format="reference" />
+    </declare-styleable>
+
+
+    <!--支持单选&多选的Spinner-->
+    <declare-styleable name="CommonSpinner">
+        <!--单选、多选-->
+        <attr name="spinnerChoiceMode">
+            <enum name="single" value="1" />
+            <enum name="multiple" value="2" />
+        </attr>
+        <attr name="spinnerLiveUpdate" format="boolean" />
+        <!--文本背景Drawable-->
+        <attr name="spinnerTextBackground" format="reference" />
+        <!--文本默认值-->
+        <attr name="spinnerText" format="string|reference" />
+        <!--文本字体大小-->
+        <attr name="spinnerTextSize" format="dimension|reference" />
+        <!--文本字体颜色-->
+        <attr name="spinnerTextColor" format="color|reference" />
+        <!--文本内间距-->
+        <attr name="spinnerTextPadding" format="dimension|reference" />
+        <!--PopupWindow背景Drawable-->
+        <attr name="spinnerDropBackground" format="reference" />
+        <!--PopupWindow宽度-->
+        <attr name="spinnerDropWidthMode">
+            <enum name="fitText" value="1" />
+            <enum name="fullScreen" value="2" />
+        </attr>
+        <!--PopupWindow ListView Item高度-->
+        <attr name="spinnerDropItemHeight" format="dimension|reference" />
+        <!--PopupWindow ListView Item字体大小-->
+        <attr name="spinnerDropItemTextSize" format="dimension|reference" />
+        <!--PopupWindow ListView Item字体颜色-->
+        <attr name="spinnerDropItemTextColor" format="color|reference" />
+    </declare-styleable>
+
+    <!--CalendarView-->
+    <declare-styleable name="CalendarView">
+        <attr name="calendar_padding" format="dimension" /><!--日历内部左右padding-->
+
+        <attr name="week_background" format="color" /><!--周背景-->
+        <attr name="week_line_background" format="color" /><!--线条颜色-->
+        <attr name="week_text_color" format="color" /><!--周栏字体颜色-->
+        <attr name="week_text_size" format="dimension" /><!--周栏字体大小-->
+        <attr name="week_line_margin" format="dimension" /><!--线条margin-->
+
+        <attr name="month_view" format="string" /><!--完全自定义月视图-->
+        <attr name="week_view" format="string" /> <!--完全自定义周视图-->
+        <attr name="year_view" format="string" /> <!--完全自定义年视图-->
+        <attr name="week_bar_height" format="dimension" /> <!--星期栏的高度-->
+        <attr name="week_bar_view" format="string" /> <!--如果需要的话使用自定义星期栏-->
+
+        <attr name="scheme_text" format="string" />
+        <attr name="day_text_size" format="dimension" />
+        <attr name="lunar_text_size" format="dimension" />
+        <attr name="calendar_height" format="dimension" />
+        <attr name="scheme_text_color" format="color" />
+        <attr name="scheme_month_text_color" format="color" />
+        <attr name="scheme_lunar_text_color" format="color" />
+        <attr name="scheme_theme_color" format="color" />
+
+        <attr name="selected_theme_color" format="color" />
+        <attr name="selected_text_color" format="color" />
+        <attr name="selected_lunar_text_color" format="color" />
+
+        <attr name="current_day_text_color" format="color" />
+        <attr name="current_day_lunar_text_color" format="color" />
+        <attr name="current_month_text_color" format="color" />
+        <attr name="other_month_text_color" format="color" />
+        <attr name="current_month_lunar_text_color" format="color" />
+        <attr name="other_month_lunar_text_color" format="color" />
+
+        <!-- 年视图相关 -->
+        <attr name="year_view_month_text_size" format="dimension" />
+        <attr name="year_view_day_text_size" format="dimension" />
+        <attr name="year_view_month_text_color" format="color" />
+        <attr name="year_view_day_text_color" format="color" />
+        <attr name="year_view_scheme_color" format="color" />
+        <attr name="year_view_background" format="color" />
+        <attr name="year_view_month_height" format="dimension" />
+        <attr name="year_view_week_height" format="dimension" />
+        <attr name="year_view_week_text_size" format="dimension" />
+        <attr name="year_view_week_text_color" format="color" />
+        <attr name="year_view_padding" format="dimension" />
+        <attr name="year_view_month_margin_top" format="dimension" />
+        <attr name="year_view_month_margin_bottom" format="dimension" />
+
+        <!--日期范围-->
+        <attr name="min_year" format="integer" />
+        <attr name="max_year" format="integer" />
+        <attr name="min_year_month" format="integer" />
+        <attr name="max_year_month" format="integer" />
+        <attr name="min_year_day" format="integer" />
+        <attr name="max_year_day" format="integer" />
+
+        <!--月视图是否可滚动-->
+        <attr name="month_view_scrollable" format="boolean" />
+        <!--周视图是否可滚动-->
+        <attr name="week_view_scrollable" format="boolean" />
+        <!--年视图是否可滚动-->
+        <attr name="year_view_scrollable" format="boolean" />
+        <!-- 月份显示模式 -->
+        <attr name="month_view_show_mode">
+            <enum name="mode_all" value="0" />
+            <enum name="mode_only_current" value="1" />
+            <enum name="mode_fix" value="2" />
+        </attr>
+        <!-- 自定义周起始 -->
+        <attr name="week_start_with">
+            <enum name="sun" value="1" />
+            <enum name="mon" value="2" />
+            <enum name="sat" value="7" />
+        </attr>
+        <!-- 自定义选择模式 -->
+        <attr name="select_mode">
+            <enum name="default_mode" value="0" />
+            <enum name="single_mode" value="1" />
+            <enum name="range_mode" value="2" />
+        </attr>
+        <!-- when select_mode=range_mode -->
+        <attr name="min_select_range" format="integer" />
+        <attr name="max_select_range" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CalendarLayout">
+        <attr name="default_status">
+            <enum name="expand" value="0" />
+            <enum name="shrink" value="1" />
+        </attr>
+        <!-- 手势模式 -->
+        <attr name="gesture_mode">
+            <enum name="default_mode" value="0" />
+            <!--<enum name="only_calendar" value="1" />-->
+            <enum name="disabled" value="2" />
+        </attr>
+        <attr name="calendar_show_mode">
+            <enum name="both_month_week_view" value="0" />
+            <enum name="only_week_view" value="1" />
+            <enum name="only_month_view" value="2" />
+        </attr>
+        <attr name="calendar_content_view_id" format="integer" />
+    </declare-styleable>
+
+    <!--CalendarView New-->
+    <declare-styleable name="CalendarViewNew">
+        <attr name="baseTextColor" format="color" />
+        <attr name="baseTextSize" format="dimension" />
+        <attr name="rowHeight" format="dimension" />
+    </declare-styleable>
+
+    <!--分组滑动的 RecyclerView-->
+
+
+</resources>

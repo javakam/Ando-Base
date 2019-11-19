@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:overScrollMode="always"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.ando.views.sample.basic.CanvasClip
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#E0AFF9" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#99FFFF" />
+
+        <com.ando.views.sample.basic.CanvasTransformBasic
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#99FFFF" />
+
+        <com.ando.views.sample.basic.CanvasTransformMatrix
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#99FFFF" />
+
+        <com.ando.views.sample.basic.CanvasTransformMatrixPractice1
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#99FFFF" />
+
+        <com.ando.views.sample.basic.CanvasTransformMatrixPractice2
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#99FFFF" />
+
+        <com.ando.views.sample.basic.CanvasTransformCamera
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#99FFFF" />
+
+        <com.ando.views.sample.basic.sample.Sample13CameraRotateHittingFaceView
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#99FFFF" />
+
+        <com.ando.views.sample.basic.DrawOrder
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#99FFFF" />
+
+    </LinearLayout>
+</ScrollView>

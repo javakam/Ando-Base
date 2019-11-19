@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+//文件输出根目录
+def rootDir = '"ViewGeneral"'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.ando.views.sample"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            buildConfigField('String', 'IP_ADDRESS', '"http://"')
+            buildConfigField('String', 'PHOTO_ADDRESS', '"http://"')
+            buildConfigField('boolean', 'LOG_DEBUG', 'true')
+            buildConfigField('String', 'ROOT_DIR', "${rootDir}")
+            buildConfigField('String', 'ROOT_PATH', '"GeneralDebug"')
+            buildConfigField('boolean', 'BUGLY', 'false')
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+        }
+
+        release {
+            buildConfigField('String', 'IP_ADDRESS', '""')
+            buildConfigField('String', 'PHOTO_ADDRESS', '""')
+            buildConfigField('boolean', 'LOG_DEBUG', 'false')
+            buildConfigField('String', 'ROOT_DIR', "${rootDir}")
+            buildConfigField('String', 'ROOT_PATH', '"GeneralRelease"')
+            buildConfigField('boolean', 'BUGLY', 'true')
+            minifyEnabled false  //混淆
+            zipAlignEnabled true //Zipalign优化
+            shrinkResources false // 移除无用的resource文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release//在此调用签名方法
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //implementation 'com.ando:ando-views:0.0.1'
+    implementation project(':ando-views')
+
+
+//    implementation 'com.android.support:design:29.0.0'
+//    implementation 'com.android.support:appcompat-v7:29.0.0'
+//    implementation 'com.android.support:support-v4:29.0.0'
+//    implementation 'com.android.support:cardview-v7:29.0.0'
+//    implementation 'com.android.support:recyclerview-v7:29.0.0‘'
+//    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    implementation 'com.j256.ormlite:ormlite-android:5.0'
+    implementation 'com.j256.ormlite:ormlite-core:5.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+}
+

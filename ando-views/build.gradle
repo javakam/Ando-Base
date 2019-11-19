@@ -1,0 +1,170 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def config = rootProject.ext.android
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        //noinspection DataBindingWithoutKapt
+        enabled = true
+    }
+
+    //在Android视图下显示 jniLibs 文件夹
+    /*sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }*/
+
+    //指定Java版本，支持Lambda表达式
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.ando:ando-base:1.0.2'
+    api 'com.haibin:calendarview:3.6.7'
+
+}
+
+/** 以下开始是将Android Library上传到 jcenter 的相关配置**/
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+//项目主页
+def siteUrl = 'https://github.com/javakam/AndoViews'    // project homepage
+//项目的版本控制地址
+def gitUrl = 'https://github.com/javakam/AndoViews.git' // project git
+
+//发布到组织名称名字，必须填写
+group = "com.ando"
+//发布到JCenter上的项目名字，必须填写
+def libName = "ando-views"
+// 版本号，下次更新是只需要更改版本号即可
+version = "0.0.1"
+/**  上面配置后上传至jcenter后的编译路径是这样的： compile 'com.ando:ando-xxx:1.0'  **/
+
+//生成源文件
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+//生成文档
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    options.encoding "UTF-8"
+    options.charSet 'UTF-8'
+    options.author true
+    options.version true
+    options.links "http://docs.oracle.com/javase/8/docs/api/"
+    failOnError false
+}
+
+//文档打包成jar
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+//拷贝javadoc文件
+task copyDoc(type: Copy) {
+    from "${buildDir}/docs/"
+    into "docs"
+}
+
+//上传到 jcenter 所需要的源码文件
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+//配置 maven 库，生成 pom.xml 文件
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+                //项目描述，自由填写
+                name 'This is Ando views library .'
+                url siteUrl
+                licenses {
+                    license {
+                        //开源协议
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        //开发者的个人信息，根据个人信息填写
+                        id 'javakam'
+                        name 'changbao'
+                        email 'jooybao@foxmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+//上传到jcenter
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+//    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+//    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    user = properties.getProperty("bintrayUser")
+    key = properties.getProperty("bintrayApiKey")
+
+    configurations = ['archives']
+    pkg {
+        repo = "maven"
+        name = libName                  //发布到JCenter上的项目名字，必须填写
+        desc = 'android banner view'    //项目描述
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
+
+javadoc {
+    options {
+        //如果你的项目里面有中文注释的话，必须将格式设置为UTF-8，不然会出现乱码
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+    }
+}
