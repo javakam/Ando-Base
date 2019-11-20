@@ -19,7 +19,10 @@ ext {
             greendao           : "3.2.2",
             eventbus           : "3.1.1",
             //androidx
-            x_support          : "1.0.0",
+            x_support          : "1.1.0",
+            x_recyclerview     : "1.0.0",
+            x_cardview         : "1.0.0",
+            x_design           : "1.0.0",
             x_appcompat        : "1.1.0",
             x_core_ktx         : "1.0.0",
             x_fragment         : "1.2.0-alpha02",
@@ -74,11 +77,11 @@ ext {
             //*********************************** AndroidX & Jetpack ***********************************//
 
             //support
-            "x_design"                     : "com.google.android.material:material:${version.x_support}",
+            "x_design"                     : "com.google.android.material:material:${version.x_design}",
             "x_appcompat"                  : "androidx.appcompat:appcompat:${version.x_appcompat}",
             "x_annotations"                : "androidx.annotation:annotation:${version.x_support}",
-            "x_recyclerview"               : "androidx.recyclerview:recyclerview:${version.x_support}",
-            "x_cardview"                   : "androidx.cardview:cardview:${version.x_support}",
+            "x_recyclerview"               : "androidx.recyclerview:recyclerview:${version.x_recyclerview}",
+            "x_cardview"                   : "androidx.cardview:cardview:${version.x_cardview}",
             "x_core_utils"                 : "androidx.legacy:legacy-support-core-utils:${version.x_support}",
             "x_core_ktx"                   : "androidx.core:core-ktx:${version.x_core_ktx}",
             "x_fragment_runtime"           : "androidx.fragment:fragment:${version.x_fragment}",
