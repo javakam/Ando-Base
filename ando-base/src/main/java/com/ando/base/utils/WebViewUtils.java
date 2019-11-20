@@ -8,6 +8,7 @@ import android.os.Build;
 import android.text.Html;
 import android.util.Patterns;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -46,15 +47,16 @@ public class WebViewUtils {
         // url callback
         webview.setWebViewClient(new WebViewClient() {
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Uri uri = Uri.parse(url);
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                Uri uri = request.getUrl();
                 Intent intent = new Intent();
                 intent.setData(uri);
                 // 分析协议 是否打开分享 or 登录
 //                if (IntentUtil.diggingIntentData(intent, activity)) {
 //                    return true;
 //                }
-                return super.shouldOverrideUrlLoading(view, url);
+
+                return super.shouldOverrideUrlLoading(view, request);
             }
 
             @Override
@@ -79,7 +81,7 @@ public class WebViewUtils {
     }
 
     public static void loadContent(WebView webView, String source) {
-        if (webView != null && webView.isAttachedToWindow()) {
+        if (webView != null) {
             final String newSource = StringUtils.noNull(source);
             String url = "";
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

@@ -14,7 +14,7 @@ ext {
             support            : "29.0.0",
             retrofit           : "2.4.0",
             okhttp             : "3.10.0",
-            glide              : "3.8.0",
+            glide              : "4.10.0",
             qmui               : "1.4.0",
             greendao           : "3.2.2",
             eventbus           : "3.1.1",
