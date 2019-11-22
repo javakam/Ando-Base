@@ -245,9 +245,9 @@ public class TimeUtils {
 
     /**
      * Fixed : PHP 返回的时间戳和Java的不一致导致时间为 1970 的问题
-     * <p>
-     * 1563423720L    System.currentTimeMillis() -> 1574392167822
-     * <p>
+     * <pre>
+     *      1563423720L    System.currentTimeMillis() -> 1574392167822
+     * </pre>
      * 时间格式：
      * 1小时内用，多少分钟前；
      * 超过1小时，显示时间而无日期；
