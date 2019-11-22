@@ -242,6 +242,23 @@ public class TimeUtils {
     private static long oneDayMillis = 24 * oneHourMillis; // 一天的毫秒数
     private static long oneYearMillis = 365 * oneDayMillis; // 一年的毫秒数
 
+
+    /**
+     * Fixed : PHP 返回的时间戳和Java的不一致导致时间为 1970 的问题
+     * <p>
+     * 1563423720L    System.currentTimeMillis() -> 1574392167822
+     * <p>
+     * 时间格式：
+     * 1小时内用，多少分钟前；
+     * 超过1小时，显示时间而无日期；
+     * 如果是昨天，则显示昨天
+     * 超过昨天再显示日期；
+     * 超过1年再显示年。
+     */
+    public static String millisToLifeStringPHP(long millis) {
+        return millisToLifeString(millis * 1000);
+    }
+
     /**
      * 时间格式：
      * 1小时内用，多少分钟前；
