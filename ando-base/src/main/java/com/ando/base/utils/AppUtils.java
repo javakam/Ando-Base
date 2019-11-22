@@ -1,6 +1,6 @@
 package com.ando.base.utils;
 
-import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -14,10 +14,9 @@ import androidx.annotation.NonNull;
  * @author Changbao
  * @date 2019/3/17 14:45
  */
-@SuppressLint("StaticFieldLeak")
 public final class AppUtils {
 
-    private static Context context;
+    private static Application context;
 
     private AppUtils() {
     }
@@ -27,8 +26,8 @@ public final class AppUtils {
      *
      * @param context 上下文
      */
-    public static void init(@NonNull Context context) {
-        AppUtils.context = context.getApplicationContext();
+    public static void init(@NonNull Application context) {
+        AppUtils.context = context;
     }
 
     /**
